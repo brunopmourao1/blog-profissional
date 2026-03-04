@@ -28,17 +28,19 @@ export default async function ThemePage({ params }: ThemePageProps) {
     const tokens = (activeTheme?.tokens as Record<string, unknown>) || DEFAULT_THEME_TOKENS;
 
     return (
-        <div style={{ padding: "2rem", maxWidth: 900, margin: "0 auto" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+        <>
+            <header className="page-header">
                 <div>
-                    <h1 style={{ fontSize: "2rem", fontWeight: 700 }}>Editor de Tema</h1>
-                    <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                    <h1>Editor de Tema</h1>
+                    <p className="page-header-sub">
                         {tenant?.name} · {activeTheme ? `Versão ${activeTheme.version}` : "Tema padrão"}
                     </p>
                 </div>
-                <a href={`/dashboard/tenants/${tenantId}`} style={{ color: "#6366f1", textDecoration: "none" }}>← Tenant</a>
+                <a href={`/dashboard/tenants/${tenantId}`} className="btn btn-ghost">← Tenant</a>
+            </header>
+            <div className="page-body">
+                <ThemeEditor tenantId={tenantId} initialTokens={tokens} />
             </div>
-            <ThemeEditor tenantId={tenantId} initialTokens={tokens} />
-        </div>
+        </>
     );
 }

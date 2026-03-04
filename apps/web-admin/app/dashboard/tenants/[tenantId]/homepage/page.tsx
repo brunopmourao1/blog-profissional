@@ -27,17 +27,19 @@ export default async function HomepagePage({ params }: HomepagePageProps) {
     const sections = (activeHome?.sections as Array<Record<string, unknown>>) || [];
 
     return (
-        <div style={{ padding: "2rem", maxWidth: 900, margin: "0 auto" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+        <>
+            <header className="page-header">
                 <div>
-                    <h1 style={{ fontSize: "2rem", fontWeight: 700 }}>Editor de Homepage</h1>
-                    <p style={{ color: "#6b7280", fontSize: "0.875rem" }}>
+                    <h1>Editor de Homepage</h1>
+                    <p className="page-header-sub">
                         {tenant?.name} · {activeHome ? `Versão ${activeHome.version}` : "Padrão"}
                     </p>
                 </div>
-                <a href={`/dashboard/tenants/${tenantId}`} style={{ color: "#6366f1", textDecoration: "none" }}>← Tenant</a>
+                <a href={`/dashboard/tenants/${tenantId}`} className="btn btn-ghost">← Tenant</a>
+            </header>
+            <div className="page-body">
+                <HomepageEditor tenantId={tenantId} initialSections={sections} />
             </div>
-            <HomepageEditor tenantId={tenantId} initialSections={sections} />
-        </div>
+        </>
     );
 }

@@ -18,38 +18,22 @@ interface PostFormProps {
     };
 }
 
-const inputStyle = {
-    width: "100%",
-    padding: "0.75rem",
-    borderRadius: 8,
-    border: "1px solid #d1d5db",
-    fontSize: "1rem",
-} as const;
-
-const labelStyle = {
-    display: "block" as const,
-    fontWeight: 600,
-    marginBottom: "0.5rem",
-};
-
 export function PostForm({ tenantId, categories, tags, post }: PostFormProps) {
     const isEditing = !!post;
 
     return (
-        <form
-            action={isEditing ? updatePost : createPost}
-            style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
-        >
+        <form action={isEditing ? updatePost : createPost} className="stack stack-lg">
             <input type="hidden" name="tenantId" value={tenantId} />
             {isEditing && <input type="hidden" name="postId" value={post.id} />}
 
-            <div>
-                <label style={labelStyle}>Título</label>
+            <div className="form-group">
+                <label className="form-label">Título</label>
                 <input
                     name="title"
                     required
                     defaultValue={post?.title}
                     placeholder="Título do post"
+                    className="form-input"
                     onInput={(e) => {
                         if (isEditing) return;
                         const slug = (e.target as HTMLInputElement).value
@@ -60,51 +44,50 @@ export function PostForm({ tenantId, categories, tags, post }: PostFormProps) {
                         const slugInput = document.getElementById("post-slug") as HTMLInputElement;
                         if (slugInput) slugInput.value = slug;
                     }}
-                    style={inputStyle}
                 />
             </div>
 
-            <div>
-                <label style={labelStyle}>Slug</label>
+            <div className="form-group">
+                <label className="form-label">Slug</label>
                 <input
                     name="slug"
                     id="post-slug"
                     required
                     defaultValue={post?.slug}
                     pattern="^[a-z0-9-]+$"
-                    style={{ ...inputStyle, fontFamily: "monospace" }}
+                    className="form-input mono"
                 />
             </div>
 
-            <div>
-                <label style={labelStyle}>Conteúdo (HTML)</label>
+            <div className="form-group">
+                <label className="form-label">Conteúdo (HTML)</label>
                 <textarea
                     name="content"
                     required
                     defaultValue={post?.content}
                     placeholder="<h2>Título</h2><p>Conteúdo do post...</p>"
                     rows={12}
-                    style={{ ...inputStyle, resize: "vertical", fontFamily: "monospace", fontSize: "0.875rem" }}
+                    className="form-textarea mono"
                 />
             </div>
 
-            <div>
-                <label style={labelStyle}>Resumo</label>
+            <div className="form-group">
+                <label className="form-label">Resumo</label>
                 <textarea
                     name="excerpt"
                     defaultValue={post?.excerpt || ""}
                     placeholder="Breve descrição do post"
                     rows={3}
-                    style={{ ...inputStyle, resize: "vertical" }}
+                    className="form-textarea"
                 />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                <div>
-                    <label style={labelStyle}>Categorias</label>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", maxHeight: 150, overflowY: "auto" }}>
+            <div className="grid-2">
+                <div className="form-group">
+                    <label className="form-label">Categorias</label>
+                    <div className="card stack stack-sm" style={{ maxHeight: 160, overflowY: "auto" }}>
                         {categories.map((cat) => (
-                            <label key={cat.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
+                            <label key={cat.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontSize: "0.875rem" }}>
                                 <input
                                     type="checkbox"
                                     name="categoryIds"
@@ -114,15 +97,15 @@ export function PostForm({ tenantId, categories, tags, post }: PostFormProps) {
                                 {cat.name}
                             </label>
                         ))}
-                        {categories.length === 0 && <span style={{ color: "#9ca3af", fontSize: "0.875rem" }}>Nenhuma categoria</span>}
+                        {categories.length === 0 && <span className="form-hint">Nenhuma categoria</span>}
                     </div>
                 </div>
 
-                <div>
-                    <label style={labelStyle}>Tags</label>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", maxHeight: 150, overflowY: "auto" }}>
+                <div className="form-group">
+                    <label className="form-label">Tags</label>
+                    <div className="card stack stack-sm" style={{ maxHeight: 160, overflowY: "auto" }}>
                         {tags.map((tag) => (
-                            <label key={tag.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
+                            <label key={tag.id} style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontSize: "0.875rem" }}>
                                 <input
                                     type="checkbox"
                                     name="tagIds"
@@ -132,37 +115,24 @@ export function PostForm({ tenantId, categories, tags, post }: PostFormProps) {
                                 {tag.name}
                             </label>
                         ))}
-                        {tags.length === 0 && <span style={{ color: "#9ca3af", fontSize: "0.875rem" }}>Nenhuma tag</span>}
+                        {tags.length === 0 && <span className="form-hint">Nenhuma tag</span>}
                     </div>
                 </div>
             </div>
 
-            <div>
-                <label style={labelStyle}>Status</label>
+            <div className="form-group">
+                <label className="form-label">Status</label>
                 <select
                     name="status"
                     defaultValue={post?.status || "DRAFT"}
-                    style={{ ...inputStyle, cursor: "pointer" }}
+                    className="form-select"
                 >
                     <option value="DRAFT">Rascunho</option>
                     <option value="PUBLISHED">Publicado</option>
                 </select>
             </div>
 
-            <button
-                type="submit"
-                style={{
-                    padding: "0.75rem 1.5rem",
-                    backgroundColor: "#6366f1",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 8,
-                    fontSize: "1rem",
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    marginTop: "0.5rem",
-                }}
-            >
+            <button type="submit" className="btn btn-primary" style={{ alignSelf: "flex-start" }}>
                 {isEditing ? "Salvar Post" : "Criar Post"}
             </button>
         </form>

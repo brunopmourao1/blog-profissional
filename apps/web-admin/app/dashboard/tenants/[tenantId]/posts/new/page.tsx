@@ -16,23 +16,21 @@ export default async function NewPostPage({ params }: NewPostPageProps) {
     const { tenantId } = await params;
 
     const [categories, tags] = await Promise.all([
-        prisma.category.findMany({
-            where: { tenantId },
-            orderBy: { name: "asc" },
-        }),
-        prisma.tag.findMany({
-            where: { tenantId },
-            orderBy: { name: "asc" },
-        }),
+        prisma.category.findMany({ where: { tenantId }, orderBy: { name: "asc" } }),
+        prisma.tag.findMany({ where: { tenantId }, orderBy: { name: "asc" } }),
     ]);
 
     return (
-        <div style={{ padding: "2rem", maxWidth: 800, margin: "0 auto" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-                <h1 style={{ fontSize: "2rem", fontWeight: 700 }}>Novo Post</h1>
-                <a href={`/dashboard/tenants/${tenantId}/posts`} style={{ color: "#6366f1", textDecoration: "none" }}>← Posts</a>
+        <>
+            <header className="page-header">
+                <div>
+                    <h1>Novo Post</h1>
+                </div>
+                <a href={`/dashboard/tenants/${tenantId}/posts`} className="btn btn-ghost">← Posts</a>
+            </header>
+            <div className="page-body" style={{ maxWidth: 800 }}>
+                <PostForm tenantId={tenantId} categories={categories} tags={tags} />
             </div>
-            <PostForm tenantId={tenantId} categories={categories} tags={tags} />
-        </div>
+        </>
     );
 }

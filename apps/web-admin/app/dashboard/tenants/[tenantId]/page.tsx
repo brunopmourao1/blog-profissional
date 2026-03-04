@@ -5,7 +5,6 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
     title: "Tenant — Admin",
-    description: "Detalhe do tenant",
 };
 
 interface TenantDetailProps {
@@ -17,21 +16,17 @@ export default async function TenantDetailPage({ params }: TenantDetailProps) {
 
     const tenant = await prisma.tenant.findUnique({
         where: { id: tenantId },
-        include: {
-            _count: { select: { posts: true } },
-        },
+        include: { _count: { select: { posts: true } } },
     });
 
     if (!tenant) {
         return (
-            <div style={{ padding: "2rem", textAlign: "center" }}>
+            <div className="page-body" style={{ textAlign: "center" }}>
                 <h1>Tenant não encontrado</h1>
-                <a href="/dashboard/tenants">← Voltar</a>
+                <a href="/dashboard/tenants" className="btn btn-outline" style={{ marginTop: "1rem" }}>← Voltar</a>
             </div>
         );
     }
-
-    const postCount = tenant._count.posts;
 
     const theme = await prisma.themeRevision.findFirst({
         where: { tenantId, active: true },
@@ -42,71 +37,50 @@ export default async function TenantDetailPage({ params }: TenantDetailProps) {
     });
 
     return (
-        <div style={{ padding: "2rem", maxWidth: 900, margin: "0 auto" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+        <>
+            <header className="page-header">
                 <div>
-                    <h1 style={{ fontSize: "2rem", fontWeight: 700 }}>{tenant.name}</h1>
-                    <p style={{ color: "#6b7280" }}>/{tenant.slug}</p>
+                    <h1>{tenant.name}</h1>
+                    <p className="page-header-sub">/{tenant.slug}</p>
                 </div>
-                <a href="/dashboard/tenants" style={{ color: "#6366f1", textDecoration: "none" }}>← Tenants</a>
+                <a href="/dashboard/tenants" className="btn btn-ghost">← Tenants</a>
+            </header>
+
+            <div className="page-body stack stack-lg">
+                <div className="stats-grid">
+                    <div className="card stat-card">
+                        <div className="stat-label">Posts</div>
+                        <div className="stat-value">{tenant._count.posts}</div>
+                    </div>
+                    <div className="card stat-card">
+                        <div className="stat-label">Tema</div>
+                        <div className="stat-value">{theme ? `v${theme.version}` : "Padrão"}</div>
+                    </div>
+                    <div className="card stat-card">
+                        <div className="stat-label">Homepage</div>
+                        <div className="stat-value">{homepage ? `v${homepage.version}` : "Padrão"}</div>
+                    </div>
+                    <div className="card stat-card">
+                        <div className="stat-label">Status</div>
+                        <div className="stat-value">{tenant.active ? "✅ Ativo" : "❌ Inativo"}</div>
+                    </div>
+                </div>
+
+                <div className="stack stack-sm">
+                    <a href={`/dashboard/tenants/${tenantId}/posts`} className="list-item card-clickable">
+                        <div className="list-item-title">📝 Gerenciar Posts</div>
+                        <span style={{ color: "var(--text-muted)", fontSize: "1.2rem" }}>→</span>
+                    </a>
+                    <a href={`/dashboard/tenants/${tenantId}/theme`} className="list-item card-clickable">
+                        <div className="list-item-title">🎨 Editor de Tema</div>
+                        <span style={{ color: "var(--text-muted)", fontSize: "1.2rem" }}>→</span>
+                    </a>
+                    <a href={`/dashboard/tenants/${tenantId}/homepage`} className="list-item card-clickable">
+                        <div className="list-item-title">🏠 Editor de Homepage</div>
+                        <span style={{ color: "var(--text-muted)", fontSize: "1.2rem" }}>→</span>
+                    </a>
+                </div>
             </div>
-
-            <div
-                style={{
-                    display: "grid",
-                    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                    gap: "1rem",
-                    marginBottom: "2rem",
-                }}
-            >
-                <StatCard label="Posts" value={String(postCount)} />
-                <StatCard label="Tema" value={theme ? `v${theme.version}` : "Padrão"} />
-                <StatCard label="Homepage" value={homepage ? `v${homepage.version}` : "Padrão"} />
-                <StatCard label="Status" value={tenant.active ? "✅ Ativo" : "❌ Inativo"} />
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                <NavLink href={`/dashboard/tenants/${tenantId}/posts`} label="📝 Gerenciar Posts" />
-                <NavLink href={`/dashboard/tenants/${tenantId}/theme`} label="🎨 Editor de Tema" />
-                <NavLink href={`/dashboard/tenants/${tenantId}/homepage`} label="🏠 Editor de Homepage" />
-            </div>
-        </div>
-    );
-}
-
-function StatCard({ label, value }: { label: string; value: string }) {
-    return (
-        <div
-            style={{
-                padding: "1.25rem",
-                borderRadius: 8,
-                backgroundColor: "#f9fafb",
-                border: "1px solid #e5e7eb",
-                textAlign: "center",
-            }}
-        >
-            <div style={{ fontSize: "0.75rem", color: "#6b7280", marginBottom: "0.25rem" }}>{label}</div>
-            <div style={{ fontSize: "1.25rem", fontWeight: 700 }}>{value}</div>
-        </div>
-    );
-}
-
-function NavLink({ href, label }: { href: string; label: string }) {
-    return (
-        <a
-            href={href}
-            style={{
-                display: "block",
-                padding: "1rem 1.5rem",
-                borderRadius: 8,
-                backgroundColor: "#f9fafb",
-                border: "1px solid #e5e7eb",
-                textDecoration: "none",
-                color: "#111827",
-                fontWeight: 500,
-            }}
-        >
-            {label}
-        </a>
+        </>
     );
 }
