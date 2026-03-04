@@ -42,6 +42,14 @@ export async function toggleTenant(tenantId: string) {
     revalidatePath("/dashboard/tenants");
 }
 
+export async function updateTenantLogo(tenantId: string, logoUrl: string) {
+    await prisma.tenant.update({
+        where: { id: tenantId },
+        data: { logoUrl },
+    });
+    revalidatePath(`/dashboard/tenants/${tenantId}`);
+}
+
 // =============================================================
 // Post Actions
 // =============================================================

@@ -56,3 +56,29 @@ export function generateToken(
 export function verifyToken(token: string): TokenPayload {
     return jwt.verify(token, getJwtSecret()) as TokenPayload;
 }
+
+// =============================================================
+// Refresh Token
+// =============================================================
+
+export function generateRefreshToken(payload: AuthPayload): string {
+    return jwt.sign(payload, getJwtSecret() + "_refresh", {
+        expiresIn: "30d",
+    } as jwt.SignOptions);
+}
+
+export function verifyRefreshToken(token: string): TokenPayload {
+    return jwt.verify(token, getJwtSecret() + "_refresh") as TokenPayload;
+}
+
+export function refreshAccessToken(refreshToken: string): {
+    accessToken: string;
+    refreshToken: string;
+} {
+    const payload = verifyRefreshToken(refreshToken);
+    const { userId, email } = payload;
+    return {
+        accessToken: generateToken({ userId, email }, "7d"),
+        refreshToken: generateRefreshToken({ userId, email }),
+    };
+}

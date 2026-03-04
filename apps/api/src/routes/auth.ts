@@ -5,6 +5,8 @@ import {
     hashPassword,
     verifyPassword,
     generateToken,
+    generateRefreshToken,
+    refreshAccessToken,
 } from "@repo/auth";
 import { validateBody } from "../lib/validate.js";
 import { authenticate } from "../middleware/auth.js";
@@ -54,8 +56,9 @@ router.post(
             });
 
             const token = generateToken({ userId: user.id, email: user.email });
+            const refreshToken = generateRefreshToken({ userId: user.id, email: user.email });
 
-            res.status(201).json({ user, token });
+            res.status(201).json({ user, token, refreshToken });
         } catch (error) {
             next(error);
         }
@@ -84,6 +87,7 @@ router.post(
             }
 
             const token = generateToken({ userId: user.id, email: user.email });
+            const refreshToken = generateRefreshToken({ userId: user.id, email: user.email });
 
             res.json({
                 user: {
@@ -92,6 +96,7 @@ router.post(
                     email: user.email,
                 },
                 token,
+                refreshToken,
             });
         } catch (error) {
             next(error);
@@ -141,3 +146,58 @@ router.get(
 );
 
 export default router;
+
+// =============================================================
+// POST /api/auth/refresh
+// =============================================================
+
+const tokenBlacklist = new Set<string>(); // In production, use Redis
+
+router.post(
+    "/refresh",
+    async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const { refreshToken: incomingToken } = req.body;
+
+            if (!incomingToken) {
+                throw new UnauthorizedError("Refresh token is required");
+            }
+
+            if (tokenBlacklist.has(incomingToken)) {
+                throw new UnauthorizedError("Token has been revoked");
+            }
+
+            const tokens = refreshAccessToken(incomingToken);
+
+            // Blacklist the old refresh token
+            tokenBlacklist.add(incomingToken);
+
+            res.json(tokens);
+        } catch (error) {
+            next(error);
+        }
+    },
+);
+
+// =============================================================
+// POST /api/auth/logout
+// =============================================================
+
+router.post(
+    "/logout",
+    authenticate,
+    async (req: Request, res: Response): Promise<void> => {
+        const authHeader = req.headers.authorization;
+        if (authHeader) {
+            const token = authHeader.replace("Bearer ", "");
+            tokenBlacklist.add(token);
+        }
+
+        const { refreshToken } = req.body;
+        if (refreshToken) {
+            tokenBlacklist.add(refreshToken);
+        }
+
+        res.json({ message: "Logged out successfully" });
+    },
+);

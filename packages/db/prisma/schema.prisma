@@ -97,6 +97,7 @@ model Tenant {
   name         String
   slug         String   @unique
   customDomain String?  @unique
+  logoUrl      String?
   active       Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -108,6 +109,7 @@ model Tenant {
   tags           Tag[]
   themeRevisions ThemeRevision[]
   homeRevisions  HomeRevision[]
+  media          Media[]
 
   @@index([agencyId])
   @@map("tenants")
@@ -235,6 +237,28 @@ model Tag {
   @@unique([tenantId, slug])
   @@index([tenantId])
   @@map("tags")
+}
+
+// =============================================================
+// Media — Arquivos de mídia (imagens, PDFs)
+// =============================================================
+
+model Media {
+  id           String   @id @default(cuid())
+  tenantId     String
+  filename     String
+  originalName String
+  mimeType     String
+  size         Int
+  url          String
+  width        Int?
+  height       Int?
+  createdAt    DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@map("media")
 }
 
 // =============================================================

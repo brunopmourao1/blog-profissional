@@ -12,6 +12,7 @@ import homepageRouter from "./routes/homepage.js";
 import brandingRouter from "./routes/branding.js";
 import billingRouter from "./routes/billing.js";
 import webhookRouter from "./routes/webhook.js";
+import mediaRouter from "./routes/media.js";
 import { authLimiter } from "./middleware/rateLimit.js";
 import { auditLog } from "./middleware/auditLog.js";
 import { AppError } from "./lib/errors.js";
@@ -26,6 +27,10 @@ const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+
+// Serve uploaded files
+import path from "path";
+app.use("/uploads", express.static(path.resolve(process.cwd(), "uploads")));
 
 // Security headers
 app.use((_req, res, next) => {
@@ -67,6 +72,7 @@ app.use("/api/tenants", homepageRouter);
 app.use("/api/agencies", brandingRouter);
 app.use("/api/agencies", billingRouter);
 app.use("/webhooks", webhookRouter);
+app.use("/api/tenants", mediaRouter);
 
 // =============================================================
 // Error Handler
