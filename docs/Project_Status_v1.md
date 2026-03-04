@@ -3,8 +3,8 @@
 ## Plataforma de Blog White-Label (SaaS)
 
 **Versão:** 1.0\
-**Última atualização:** 2026-03-02\
-**Fase atual:** � Sprint 1 — Fundação Multi-Tenant (Fase 0 concluída)
+**Última atualização:** 2026-03-03\
+**Fase atual:** 🟡 Sprint 2 — Motor de Publicação (Sprint 1 concluída)
 
 ---
 
@@ -104,45 +104,45 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 ---
 
-### 🟢 SPRINT 1 — Fundação Multi-Tenant
-> **Status:** ❌ Não iniciada | **Prioridade:** Alta
+### 🟢 SPRINT 1 — Fundação Multi-Tenant ✅
+> **Status:** ✅ Concluída (2026-03-03) | **Prioridade:** Alta
 
 #### 1.1 Banco de Dados
-- [ ] Configurar PostgreSQL (Neon)
-- [ ] Configurar Prisma no pacote `packages/db`
-- [ ] Criar schema das entidades principais:
-  - [ ] Agency (Agência)
-  - [ ] Tenant
-  - [ ] User (Usuário)
-  - [ ] Membership (Associação)
-- [ ] Criar migrações iniciais
-- [ ] Seed de dados para desenvolvimento
+- [x] Configurar PostgreSQL (Neon)
+- [x] Configurar Prisma no pacote `packages/db`
+- [x] Criar schema das entidades principais:
+  - [x] Agency (Agência)
+  - [x] Tenant
+  - [x] User (Usuário)
+  - [x] Membership (Associação)
+- [x] Criar migrações iniciais
+- [x] Seed de dados para desenvolvimento
 
 #### 1.2 Isolamento Multi-Tenant
-- [ ] Implementar middleware de resolução de tenant (Host header)
-- [ ] Resolver por subdomínio
-- [ ] Resolver por domínio personalizado
-- [ ] Garantir filtragem por `tenantId` em todas as queries
-- [ ] Testar isolamento entre tenants
+- [x] Implementar middleware de resolução de tenant (Host header)
+- [x] Resolver por subdomínio
+- [x] Resolver por domínio personalizado
+- [x] Garantir filtragem por `tenantId` em todas as queries
+- [x] Testar isolamento entre tenants
 
 #### 1.3 Autenticação
-- [ ] Implementar registro de usuário
-- [ ] Implementar login (JWT)
-- [ ] Hash de senha com bcrypt
+- [x] Implementar registro de usuário
+- [x] Implementar login (JWT)
+- [x] Hash de senha com bcrypt
 - [ ] Refresh token
 - [ ] Logout / invalidação de token
 
 #### 1.4 RBAC (Controle de Acesso)
-- [ ] Definir papéis: SuperAdmin, AgencyOwner, AgencyMember, TenantAdmin, TenantEditor
-- [ ] Implementar middleware de autorização
-- [ ] Validar permissões por endpoint
-- [ ] Testes de RBAC
+- [x] Definir papéis: SuperAdmin, AgencyOwner, AgencyMember, TenantAdmin, TenantEditor
+- [x] Implementar middleware de autorização
+- [x] Validar permissões por endpoint
+- [x] Testes de RBAC
 
 #### ✅ Critérios de Pronto (Sprint 1)
-- [ ] Isolamento de tenant validado
-- [ ] Autenticação funcional
-- [ ] RBAC implementado e testado
-- [ ] Documentação atualizada
+- [x] Isolamento de tenant validado
+- [x] Autenticação funcional
+- [x] RBAC implementado e testado
+- [x] Documentação atualizada
 
 ---
 
@@ -348,19 +348,19 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 | Sprint | Descrição | Itens | Concluídos | Status |
 |--------|-----------|-------|-----------|--------|
 | 0 | Preparação do Ambiente | 7 | 6 | ✅ Concluída |
-| 1 | Fundação Multi-Tenant | 18 | 0 | ❌ Não iniciada |
+| 1 | Fundação Multi-Tenant | 18 | 16 | ✅ Concluída |
 | 2 | Motor de Publicação | 25 | 0 | ❌ Não iniciada |
 | 3 | Motor de Temas | 14 | 0 | ❌ Não iniciada |
 | 4 | Construtor de Homepage | 12 | 0 | ❌ Não iniciada |
 | 5 | Camada de Agência | 10 | 0 | ❌ Não iniciada |
 | 6 | Cobrança e Hardening | 20 | 0 | ❌ Não iniciada |
-| **TOTAL** | | **106** | **6** | **6%** |
+| **TOTAL** | | **106** | **22** | **21%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** O projeto está na fase de **pré-desenvolvimento**. Toda a documentação estratégica, de produto, técnica e de negócio está concluída. Nenhum código foi escrito ainda. O próximo passo é iniciar a **Fase 0 (Preparação do Ambiente)** seguida pela **Sprint 1 (Fundação Multi-Tenant)**.
+> **Contexto atual:** Fase 0 e Sprint 1 concluídas. O monorepo está configurado com Turborepo, e a fundação multi-tenant (Prisma schema, auth JWT/bcrypt, API com RBAC, 12 endpoints) está implementada e compilando. O próximo passo é a **Sprint 2 (Motor de Publicação)**.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 

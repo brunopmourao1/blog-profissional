@@ -60,6 +60,9 @@ model Tenant {
 
   agency      Agency       @relation(fields: [agencyId], references: [id], onDelete: Cascade)
   memberships Membership[]
+  posts       Post[]
+  categories  Category[]
+  tags        Tag[]
 
   @@index([agencyId])
   @@map("tenants")
@@ -79,6 +82,7 @@ model User {
   updatedAt     DateTime @updatedAt
 
   memberships Membership[]
+  posts       Post[]
 
   @@map("users")
 }
@@ -104,4 +108,86 @@ model Membership {
   @@index([agencyId])
   @@index([tenantId])
   @@map("memberships")
+}
+
+// =============================================================
+// Content Enums
+// =============================================================
+
+enum PostStatus {
+  DRAFT
+  PUBLISHED
+  SCHEDULED
+}
+
+// =============================================================
+// Post — Conteúdo do blog
+// =============================================================
+
+model Post {
+  id             String     @id @default(cuid())
+  tenantId       String
+  authorId       String
+  title          String
+  slug           String
+  content        String     @db.Text
+  excerpt        String?    @db.Text
+  coverImage     String?
+  status         PostStatus @default(DRAFT)
+  publishedAt    DateTime?
+  seoTitle       String?
+  seoDescription String?
+  ogImage        String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  tenant     Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  author     User       @relation(fields: [authorId], references: [id])
+  categories Category[] @relation("PostCategories")
+  tags       Tag[]      @relation("PostTags")
+
+  @@unique([tenantId, slug])
+  @@index([tenantId, status])
+  @@index([tenantId, publishedAt])
+  @@index([authorId])
+  @@map("posts")
+}
+
+// =============================================================
+// Category — Categoria de posts
+// =============================================================
+
+model Category {
+  id          String   @id @default(cuid())
+  tenantId    String
+  name        String
+  slug        String
+  description String?
+  createdAt   DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  posts  Post[] @relation("PostCategories")
+
+  @@unique([tenantId, slug])
+  @@index([tenantId])
+  @@map("categories")
+}
+
+// =============================================================
+// Tag — Tag de posts
+// =============================================================
+
+model Tag {
+  id        String   @id @default(cuid())
+  tenantId  String
+  name      String
+  slug      String
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  posts  Post[] @relation("PostTags")
+
+  @@unique([tenantId, slug])
+  @@index([tenantId])
+  @@map("tags")
 }
