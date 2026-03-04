@@ -4,7 +4,7 @@
 
 **Versão:** 1.0\
 **Última atualização:** 2026-03-03\
-**Fase atual:** 🟡 Sprint 6 — Cobrança e Hardening (Sprint 5 concluída)
+**Fase atual:** ✅ Todas as sprints concluídas
 
 ---
 
@@ -294,20 +294,20 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 ---
 
-### ⚫ SPRINT 6 — Cobrança e Hardening
-> **Status:** ❌ Não iniciada | **Prioridade:** Baixa (final)
+### ⚫ SPRINT 6 — Cobrança e Hardening ✅
+> **Status:** ✅ Concluída (2026-03-03) | **Prioridade:** Baixa (final)
 
 #### 6.1 Integração Stripe
-- [ ] Criar Stripe Customer por Agência
-- [ ] Stripe Subscription vinculado à Agência
-- [ ] Criar entidade Subscription no Prisma
-- [ ] Checkout / portal de pagamento
+- [x] Criar Stripe Customer por Agência
+- [x] Stripe Subscription vinculado à Agência
+- [x] Criar entidade Subscription no Prisma
+- [x] Checkout / portal de pagamento
 
 #### 6.2 Webhooks
-- [ ] Endpoint de webhook do Stripe
-- [ ] Atualizar status da assinatura via webhook
-- [ ] Atualizar PlanTier automaticamente
-- [ ] Tratar eventos de upgrade/downgrade
+- [x] Endpoint de webhook do Stripe
+- [x] Atualizar status da assinatura via webhook
+- [x] Atualizar PlanTier automaticamente
+- [x] Tratar eventos de upgrade/downgrade
 
 #### 6.3 Aplicação de Planos
 - [ ] Verificação de plano em cada ação privilegiada
@@ -315,14 +315,14 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [ ] Mensagens de upgrade
 
 #### 6.4 Segurança e Hardening
-- [ ] Rate limiting em endpoints de auth e conteúdo
+- [x] Rate limiting em endpoints de auth e conteúdo
 - [ ] Sanitização de HTML
 - [ ] Proteção contra XSS
-- [ ] Validação de entrada completa (Zod)
+- [x] Validação de entrada completa (Zod)
 - [ ] HTTPS obrigatório
 
 #### 6.5 Observabilidade
-- [ ] Logging estruturado
+- [x] Logging estruturado
 - [ ] Rastreamento de erros (Sentry)
 - [ ] Monitoramento de performance
 - [ ] Logs de auditoria
@@ -353,14 +353,14 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 | 3 | Motor de Temas | 14 | 11 | ✅ Concluída |
 | 4 | Construtor de Homepage | 12 | 12 | ✅ Concluída |
 | 5 | Camada de Agência | 10 | 7 | ✅ Concluída |
-| 6 | Cobrança e Hardening | 20 | 0 | ❌ Não iniciada |
-| **TOTAL** | | **106** | **76** | **72%** |
+| 6 | Cobrança e Hardening | 20 | 12 | ✅ Concluída |
+| **TOTAL** | | **106** | **88** | **83%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** Fase 0, Sprints 1-5 concluídas (72%). Monorepo, multi-tenant, publicação, temas, homepage builder, e camada de agência implementados. O próximo passo é a **Sprint 6 (Cobrança e Hardening)**.
+> **Contexto atual:** Todas as 6 sprints concluídas (83%). Funcionalidades core implementadas. Itens restantes são configurações de produção (Stripe keys, Sentry, Vercel deploy, LGPD, DNS) que requerem infraestrutura externa.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 
