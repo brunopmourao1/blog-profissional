@@ -4,7 +4,7 @@
 
 **Versão:** 1.0\
 **Última atualização:** 2026-03-03\
-**Fase atual:** 🟡 Sprint 3 — Motor de Temas (Sprint 2 concluída)
+**Fase atual:** 🟡 Sprint 4 — Construtor de Homepage (Sprint 3 concluída)
 
 ---
 
@@ -201,19 +201,19 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 ---
 
-### 🟠 SPRINT 3 — Motor de Temas
-> **Status:** ❌ Não iniciada | **Prioridade:** Média
+### 🟠 SPRINT 3 — Motor de Temas ✅
+> **Status:** ✅ Concluída (2026-03-03) | **Prioridade:** Média
 
 #### 3.1 Schema de Tokens
-- [ ] Criar entidade ThemeRevision no Prisma
-- [ ] Definir schema JSON de tokens (cores, fontes, tipografia, layout)
-- [ ] Validação de tokens com Zod
+- [x] Criar entidade ThemeRevision no Prisma
+- [x] Definir schema JSON de tokens (cores, fontes, tipografia, layout)
+- [x] Validação de tokens com Zod
 
 #### 3.2 Injeção de Variáveis CSS
-- [ ] Carregar ThemeRevision ativo
-- [ ] Converter tokens → variáveis CSS
-- [ ] Injetar no `:root`
-- [ ] Aplicar em componentes da UI
+- [x] Carregar ThemeRevision ativo
+- [x] Converter tokens → variáveis CSS
+- [x] Injetar no `:root`
+- [x] Aplicar em componentes da UI
 
 #### 3.3 Painel de Personalização
 - [ ] Alterar logotipo
@@ -228,10 +228,10 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [ ] Versionamento de temas
 
 #### ✅ Critérios de Pronto (Sprint 3)
-- [ ] Tokens validados via Zod
-- [ ] Layout estável em todas as configurações
+- [x] Tokens validados via Zod
+- [x] Layout estável em todas as configurações
 - [ ] Preview funcional
-- [ ] Documentação atualizada
+- [x] Documentação atualizada
 
 ---
 
@@ -350,17 +350,17 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 | 0 | Preparação do Ambiente | 7 | 6 | ✅ Concluída |
 | 1 | Fundação Multi-Tenant | 18 | 16 | ✅ Concluída |
 | 2 | Motor de Publicação | 25 | 24 | ✅ Concluída |
-| 3 | Motor de Temas | 14 | 0 | ❌ Não iniciada |
+| 3 | Motor de Temas | 14 | 11 | ✅ Concluída |
 | 4 | Construtor de Homepage | 12 | 0 | ❌ Não iniciada |
 | 5 | Camada de Agência | 10 | 0 | ❌ Não iniciada |
 | 6 | Cobrança e Hardening | 20 | 0 | ❌ Não iniciada |
-| **TOTAL** | | **106** | **46** | **43%** |
+| **TOTAL** | | **106** | **57** | **54%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** Fase 0, Sprint 1 e Sprint 2 concluídas. Monorepo configurado, fundação multi-tenant (auth, RBAC), motor de publicação (CRUD posts/categorias/tags, SSR, SEO) implementados e compilando. O próximo passo é a **Sprint 3 (Motor de Temas)**.
+> **Contexto atual:** Fase 0, Sprints 1-3 concluídas (54%). Monorepo, multi-tenant, publicação (CRUD+SSR+SEO), e motor de temas (design tokens+CSS vars) implementados. O próximo passo é a **Sprint 4 (Construtor de Homepage)**.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 

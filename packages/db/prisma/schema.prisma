@@ -64,6 +64,7 @@ model Tenant {
   categories     Category[]
   tags           Tag[]
   themeRevisions ThemeRevision[]
+  homeRevisions  HomeRevision[]
 
   @@index([agencyId])
   @@map("tenants")
@@ -210,4 +211,23 @@ model ThemeRevision {
   @@unique([tenantId, version])
   @@index([tenantId, active])
   @@map("theme_revisions")
+}
+
+// =============================================================
+// HomeRevision — Revisão de homepage com seções configuráveis
+// =============================================================
+
+model HomeRevision {
+  id        String   @id @default(cuid())
+  tenantId  String
+  version   Int      @default(1)
+  active    Boolean  @default(false)
+  sections  Json
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, version])
+  @@index([tenantId, active])
+  @@map("home_revisions")
 }

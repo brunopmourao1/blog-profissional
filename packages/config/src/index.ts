@@ -128,3 +128,57 @@ export function tokensToCssVars(tokens: ThemeTokens): string {
     --layout-spacing: ${tokens.layout.spacing};
   `.trim();
 }
+
+// =============================================================
+// Homepage Sections
+// =============================================================
+
+export const SECTION_TYPES = [
+    "hero",
+    "latest-posts",
+    "category-posts",
+    "featured",
+    "newsletter",
+] as const;
+
+export type SectionType = (typeof SECTION_TYPES)[number];
+
+export const homeSectionSchema = z.object({
+    type: z.enum(SECTION_TYPES),
+    order: z.number().int().min(0),
+    config: z
+        .object({
+            title: z.string().optional(),
+            subtitle: z.string().optional(),
+            ctaText: z.string().optional(),
+            ctaUrl: z.string().optional(),
+            limit: z.number().int().min(1).max(20).default(6),
+            categoryId: z.string().optional(),
+            layout: z.enum(["grid", "list", "carousel"]).default("grid"),
+        })
+        .default({}),
+});
+
+export type HomeSection = z.infer<typeof homeSectionSchema>;
+
+export const homeRevisionSchema = z.object({
+    sections: z.array(homeSectionSchema).min(1).max(20),
+});
+
+export const DEFAULT_HOME_SECTIONS: HomeSection[] = [
+    {
+        type: "hero",
+        order: 0,
+        config: {
+            title: "Bem-vindo ao Blog",
+            subtitle: "Conteúdo atualizado para você",
+            limit: 6,
+            layout: "grid",
+        },
+    },
+    {
+        type: "latest-posts",
+        order: 1,
+        config: { title: "Últimos artigos", limit: 6, layout: "grid" },
+    },
+];
