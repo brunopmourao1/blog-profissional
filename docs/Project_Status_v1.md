@@ -310,14 +310,14 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [x] Tratar eventos de upgrade/downgrade
 
 #### 6.3 Aplicação de Planos
-- [ ] Verificação de plano em cada ação privilegiada
-- [ ] Bloquear funcionalidades fora do plano
-- [ ] Mensagens de upgrade
+- [x] Verificação de plano em cada ação privilegiada
+- [x] Bloquear funcionalidades fora do plano
+- [x] Mensagens de upgrade
 
 #### 6.4 Segurança e Hardening
 - [x] Rate limiting em endpoints de auth e conteúdo
-- [ ] Sanitização de HTML
-- [ ] Proteção contra XSS
+- [x] Sanitização de HTML
+- [x] Proteção contra XSS
 - [x] Validação de entrada completa (Zod)
 - [ ] HTTPS obrigatório
 
@@ -325,14 +325,14 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [x] Logging estruturado
 - [ ] Rastreamento de erros (Sentry)
 - [ ] Monitoramento de performance
-- [ ] Logs de auditoria
+- [x] Logs de auditoria
 
 #### 6.6 Deploy e Produção
 - [ ] Configurar ambientes (dev / staging / produção)
 - [ ] Deploy na Vercel
 - [ ] Backups automatizados do PostgreSQL
-- [ ] Política de Privacidade e Termos de Uso
-- [ ] Aviso de Cookies (LGPD)
+- [x] Política de Privacidade e Termos de Uso
+- [x] Aviso de Cookies (LGPD)
 
 #### ✅ Critérios de Pronto (Sprint 6)
 - [ ] Stripe funcional (pagamento, upgrade, downgrade)
@@ -353,14 +353,14 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 | 3 | Motor de Temas | 14 | 11 | ✅ Concluída |
 | 4 | Construtor de Homepage | 12 | 12 | ✅ Concluída |
 | 5 | Camada de Agência | 10 | 7 | ✅ Concluída |
-| 6 | Cobrança e Hardening | 20 | 12 | ✅ Concluída |
-| **TOTAL** | | **106** | **88** | **83%** |
+| 6 | Cobrança e Hardening | 20 | 18 | ✅ Concluída |
+| **TOTAL** | | **106** | **94** | **89%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** Todas as 6 sprints concluídas (83%). Funcionalidades core implementadas. Itens restantes são configurações de produção (Stripe keys, Sentry, Vercel deploy, LGPD, DNS) que requerem infraestrutura externa.
+> **Contexto atual:** Todas as 6 sprints concluídas (89%). Funcionalidades core + hardening implementados. Itens restantes (11%) são configurações de infraestrutura: HTTPS, Sentry, Vercel deploy, backups.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 
