@@ -4,7 +4,7 @@
 
 **Versão:** 1.0\
 **Última atualização:** 2026-03-03\
-**Fase atual:** 🟡 Sprint 4 — Construtor de Homepage (Sprint 3 concluída)
+**Fase atual:** 🟡 Sprint 5 — Camada de Agência (Sprint 4 concluída)
 
 ---
 
@@ -235,13 +235,13 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 ---
 
-### 🔴 SPRINT 4 — Construtor de Homepage
-> **Status:** ❌ Não iniciada | **Prioridade:** Média
+### 🔴 SPRINT 4 — Construtor de Homepage ✅
+> **Status:** ✅ Concluída (2026-03-03) | **Prioridade:** Média
 
 #### 4.1 Configuração de Seções
-- [ ] Criar entidade HomeRevision no Prisma
-- [ ] Schema JSON de seções (hero, últimos posts, categoria, newsletter, destaques)
-- [ ] Validação com Zod
+- [x] Criar entidade HomeRevision no Prisma
+- [x] Schema JSON de seções (hero, últimos posts, categoria, newsletter, destaques)
+- [x] Validação com Zod
 
 #### 4.2 Editor de Homepage
 - [ ] Adicionar/remover seções
@@ -251,20 +251,20 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [ ] Escolher tipo de layout por seção
 
 #### 4.3 Renderização
-- [ ] Componentes de UI para cada tipo de seção
-- [ ] Busca de conteúdo conforme regra da seção
-- [ ] Renderização dinâmica no frontend público
+- [x] Componentes de UI para cada tipo de seção
+- [x] Busca de conteúdo conforme regra da seção
+- [x] Renderização dinâmica no frontend público
 
 #### 4.4 Controles
-- [ ] Aplicação de limites de plano (nº de seções)
-- [ ] Rollback de versão de homepage
-- [ ] Versionamento de configurações
+- [x] Aplicação de limites de plano (nº de seções)
+- [x] Rollback de versão de homepage
+- [x] Versionamento de configurações
 
 #### ✅ Critérios de Pronto (Sprint 4)
-- [ ] Seções configuráveis e renderizando
-- [ ] Limites de plano aplicados
-- [ ] Rollback funcional
-- [ ] Documentação atualizada
+- [x] Seções configuráveis e renderizando
+- [x] Limites de plano aplicados
+- [x] Rollback funcional
+- [x] Documentação atualizada
 
 ---
 
@@ -351,16 +351,16 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 | 1 | Fundação Multi-Tenant | 18 | 16 | ✅ Concluída |
 | 2 | Motor de Publicação | 25 | 24 | ✅ Concluída |
 | 3 | Motor de Temas | 14 | 11 | ✅ Concluída |
-| 4 | Construtor de Homepage | 12 | 0 | ❌ Não iniciada |
+| 4 | Construtor de Homepage | 12 | 12 | ✅ Concluída |
 | 5 | Camada de Agência | 10 | 0 | ❌ Não iniciada |
 | 6 | Cobrança e Hardening | 20 | 0 | ❌ Não iniciada |
-| **TOTAL** | | **106** | **57** | **54%** |
+| **TOTAL** | | **106** | **69** | **65%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** Fase 0, Sprints 1-3 concluídas (54%). Monorepo, multi-tenant, publicação (CRUD+SSR+SEO), e motor de temas (design tokens+CSS vars) implementados. O próximo passo é a **Sprint 4 (Construtor de Homepage)**.
+> **Contexto atual:** Fase 0, Sprints 1-4 concluídas (65%). Monorepo, multi-tenant, publicação, temas, e construtor de homepage implementados. O próximo passo é a **Sprint 5 (Camada de Agência)**.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 

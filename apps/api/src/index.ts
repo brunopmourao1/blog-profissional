@@ -9,6 +9,7 @@ import categoryRouter from "./routes/category.js";
 import tagRouter from "./routes/tag.js";
 import themeRouter from "./routes/theme.js";
 import homepageRouter from "./routes/homepage.js";
+import brandingRouter from "./routes/branding.js";
 import { AppError } from "./lib/errors.js";
 import type { Request, Response, NextFunction } from "express";
 
@@ -46,6 +47,7 @@ app.use("/api/tenants", categoryRouter);
 app.use("/api/tenants", tagRouter);
 app.use("/api/tenants", themeRouter);
 app.use("/api/tenants", homepageRouter);
+app.use("/api/agencies", brandingRouter);
 
 // =============================================================
 // Error Handler

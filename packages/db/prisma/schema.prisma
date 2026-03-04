@@ -40,8 +40,25 @@ model Agency {
 
   tenants     Tenant[]
   memberships Membership[]
+  branding    AgencyBranding?
 
   @@map("agencies")
+}
+
+// =============================================================
+// AgencyBranding — White-label branding da agência
+// =============================================================
+
+model AgencyBranding {
+  id           String  @id @default(cuid())
+  agencyId     String  @unique
+  logo         String?
+  primaryColor String? @default("#6366f1")
+  panelDomain  String? @unique
+
+  agency Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  @@map("agency_brandings")
 }
 
 // =============================================================
