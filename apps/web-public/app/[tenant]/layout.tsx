@@ -2,6 +2,7 @@ import { prisma } from "@repo/db";
 import { tokensToCssVars, DEFAULT_THEME_TOKENS, type ThemeTokens } from "@repo/config";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { CookieBanner } from "./CookieBanner";
 
 interface TenantLayoutProps {
     children: React.ReactNode;
@@ -133,8 +134,20 @@ export default async function TenantLayout({
                     fontSize: "0.875rem",
                 }}
             >
-                © {new Date().getFullYear()} {tenant.name}
+                <div style={{ marginBottom: "0.5rem" }}>
+                    © {new Date().getFullYear()} {tenant.name}
+                </div>
+                <div style={{ display: "flex", justifyContent: "center", gap: "1.5rem" }}>
+                    <a href={`/${tenant.slug}/privacy`} style={{ color: "var(--color-muted)", textDecoration: "none" }}>
+                        Política de Privacidade
+                    </a>
+                    <a href={`/${tenant.slug}/terms`} style={{ color: "var(--color-muted)", textDecoration: "none" }}>
+                        Termos de Uso
+                    </a>
+                </div>
             </footer>
+
+            <CookieBanner tenantSlug={tenant.slug} />
         </div>
     );
 }
