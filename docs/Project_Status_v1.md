@@ -4,7 +4,7 @@
 
 **Versão:** 1.0\
 **Última atualização:** 2026-03-02\
-**Fase atual:** 🔴 Pré-desenvolvimento (Planejamento Estratégico concluído)
+**Fase atual:** � Sprint 1 — Fundação Multi-Tenant (Fase 0 concluída)
 
 ---
 
@@ -91,15 +91,15 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 ---
 
-### 🔵 FASE 0 — Preparação do Ambiente
-> **Status:** ❌ Não iniciada
+### 🔵 FASE 0 — Preparação do Ambiente ✅
+> **Status:** ✅ Concluída (2026-03-02)
 
-- [ ] Inicializar repositório Git
-- [ ] Configurar monorepo (Turborepo ou similar)
-- [ ] Configurar ESLint + Prettier
-- [ ] Configurar TypeScript
-- [ ] Configurar variáveis de ambiente (.env)
-- [ ] Criar estrutura de diretórios (`apps/`, `packages/`)
+- [x] Inicializar repositório Git
+- [x] Configurar monorepo (Turborepo 2.8.12)
+- [x] Configurar ESLint + Prettier
+- [x] Configurar TypeScript
+- [x] Configurar variáveis de ambiente (.env)
+- [x] Criar estrutura de diretórios (`apps/`, `packages/`)
 - [ ] Configurar CI/CD básico (opcional nesta fase)
 
 ---
@@ -347,14 +347,14 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 | Sprint | Descrição | Itens | Concluídos | Status |
 |--------|-----------|-------|-----------|--------|
-| 0 | Preparação do Ambiente | 7 | 0 | ❌ Não iniciada |
+| 0 | Preparação do Ambiente | 7 | 6 | ✅ Concluída |
 | 1 | Fundação Multi-Tenant | 18 | 0 | ❌ Não iniciada |
 | 2 | Motor de Publicação | 25 | 0 | ❌ Não iniciada |
 | 3 | Motor de Temas | 14 | 0 | ❌ Não iniciada |
 | 4 | Construtor de Homepage | 12 | 0 | ❌ Não iniciada |
 | 5 | Camada de Agência | 10 | 0 | ❌ Não iniciada |
 | 6 | Cobrança e Hardening | 20 | 0 | ❌ Não iniciada |
-| **TOTAL** | | **106** | **0** | **0%** |
+| **TOTAL** | | **106** | **6** | **6%** |
 
 ---
 

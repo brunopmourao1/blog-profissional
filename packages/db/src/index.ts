@@ -11,4 +11,6 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export { PrismaClient };
+export type { Agency, Tenant, User, Membership } from "@prisma/client";
+export { Role, PlanTier } from "@prisma/client";
 export default prisma;

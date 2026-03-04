@@ -1,10 +1,58 @@
-// @repo/auth
-// Utilitários de autenticação — será implementado na Sprint 1
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
-export const AUTH_PLACEHOLDER = true;
+// =============================================================
+// Types
+// =============================================================
 
-// Exports futuros:
-// - hashPassword(password: string): Promise<string>
-// - verifyPassword(password: string, hash: string): Promise<boolean>
-// - generateToken(payload: object): string
-// - verifyToken(token: string): object
+export interface AuthPayload {
+    userId: string;
+    email: string;
+}
+
+export interface TokenPayload extends AuthPayload {
+    iat: number;
+    exp: number;
+}
+
+// =============================================================
+// Password Hashing
+// =============================================================
+
+const SALT_ROUNDS = 10;
+
+export async function hashPassword(password: string): Promise<string> {
+    return bcrypt.hash(password, SALT_ROUNDS);
+}
+
+export async function verifyPassword(
+    password: string,
+    hash: string,
+): Promise<boolean> {
+    return bcrypt.compare(password, hash);
+}
+
+// =============================================================
+// JWT Token
+// =============================================================
+
+function getJwtSecret(): string {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+        throw new Error("JWT_SECRET environment variable is not set");
+    }
+    return secret;
+}
+
+export function generateToken(
+    payload: AuthPayload,
+    expiresIn: string = "7d",
+): string {
+    return jwt.sign(payload, getJwtSecret(), {
+        expiresIn,
+    } as jwt.SignOptions);
+}
+
+export function verifyToken(token: string): TokenPayload {
+    return jwt.verify(token, getJwtSecret()) as TokenPayload;
+}

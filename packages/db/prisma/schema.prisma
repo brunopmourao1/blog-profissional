@@ -8,6 +8,100 @@ datasource db {
 }
 
 // =============================================================
-// Entidades serão adicionadas na Sprint 1:
-// - Agency, Tenant, User, Membership
+// Enums
 // =============================================================
+
+enum Role {
+  SUPER_ADMIN
+  AGENCY_OWNER
+  AGENCY_MEMBER
+  TENANT_ADMIN
+  TENANT_EDITOR
+}
+
+enum PlanTier {
+  STARTER
+  GROWTH
+  UNLIMITED
+}
+
+// =============================================================
+// Agency — Agência (cliente direto da plataforma)
+// =============================================================
+
+model Agency {
+  id                String   @id @default(cuid())
+  name              String
+  slug              String   @unique
+  planTier          PlanTier @default(STARTER)
+  stripeCustomerId  String?  @unique
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  tenants     Tenant[]
+  memberships Membership[]
+
+  @@map("agencies")
+}
+
+// =============================================================
+// Tenant — Blog individual gerenciado pela agência
+// =============================================================
+
+model Tenant {
+  id           String   @id @default(cuid())
+  agencyId     String
+  name         String
+  slug         String   @unique
+  customDomain String?  @unique
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  agency      Agency       @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  memberships Membership[]
+
+  @@index([agencyId])
+  @@map("tenants")
+}
+
+// =============================================================
+// User — Usuário da plataforma
+// =============================================================
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  memberships Membership[]
+
+  @@map("users")
+}
+
+// =============================================================
+// Membership — Associação user ↔ agency/tenant com role
+// =============================================================
+
+model Membership {
+  id        String   @id @default(cuid())
+  userId    String
+  agencyId  String?
+  tenantId  String?
+  role      Role
+  createdAt DateTime @default(now())
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agency Agency? @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  tenant Tenant? @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, agencyId])
+  @@unique([userId, tenantId])
+  @@index([agencyId])
+  @@index([tenantId])
+  @@map("memberships")
+}
