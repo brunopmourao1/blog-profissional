@@ -4,7 +4,7 @@
 
 **Versão:** 1.0\
 **Última atualização:** 2026-03-03\
-**Fase atual:** 🟡 Sprint 5 — Camada de Agência (Sprint 4 concluída)
+**Fase atual:** 🟡 Sprint 6 — Cobrança e Hardening (Sprint 5 concluída)
 
 ---
 
@@ -268,29 +268,29 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 ---
 
-### 🟣 SPRINT 5 — Camada de Agência
-> **Status:** ❌ Não iniciada | **Prioridade:** Média-Baixa
+### 🟣 SPRINT 5 — Camada de Agência ✅
+> **Status:** ✅ Concluída (2026-03-03) | **Prioridade:** Média-Baixa
 
 #### 5.1 Gestão Multi-Tenant
-- [ ] Criação de tenants por agência
-- [ ] Listagem e gerenciamento de tenants
-- [ ] Limites por plano (nº de tenants)
+- [x] Criação de tenants por agência
+- [x] Listagem e gerenciamento de tenants
+- [x] Limites por plano (nº de tenants)
 
 #### 5.2 Gestão de Membros
-- [ ] Convite de membros
-- [ ] Atribuição de papéis
-- [ ] Remoção de membros
+- [x] Convite de membros
+- [x] Atribuição de papéis
+- [x] Remoção de membros
 
 #### 5.3 White-Label
-- [ ] Branding personalizado do painel (logo, cores)
+- [x] Branding personalizado do painel (logo, cores)
 - [ ] Domínio personalizado do painel
 - [ ] Remover referências à plataforma
 - [ ] Verificação de domínio (DNS)
 
 #### ✅ Critérios de Pronto (Sprint 5)
-- [ ] Fluxo multi-tenant completo
+- [x] Fluxo multi-tenant completo
 - [ ] White-label funcional
-- [ ] Documentação atualizada
+- [x] Documentação atualizada
 
 ---
 
@@ -352,15 +352,15 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 | 2 | Motor de Publicação | 25 | 24 | ✅ Concluída |
 | 3 | Motor de Temas | 14 | 11 | ✅ Concluída |
 | 4 | Construtor de Homepage | 12 | 12 | ✅ Concluída |
-| 5 | Camada de Agência | 10 | 0 | ❌ Não iniciada |
+| 5 | Camada de Agência | 10 | 7 | ✅ Concluída |
 | 6 | Cobrança e Hardening | 20 | 0 | ❌ Não iniciada |
-| **TOTAL** | | **106** | **69** | **65%** |
+| **TOTAL** | | **106** | **76** | **72%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** Fase 0, Sprints 1-4 concluídas (65%). Monorepo, multi-tenant, publicação, temas, e construtor de homepage implementados. O próximo passo é a **Sprint 5 (Camada de Agência)**.
+> **Contexto atual:** Fase 0, Sprints 1-5 concluídas (72%). Monorepo, multi-tenant, publicação, temas, homepage builder, e camada de agência implementados. O próximo passo é a **Sprint 6 (Cobrança e Hardening)**.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 

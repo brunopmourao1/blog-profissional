@@ -25,6 +25,13 @@ enum PlanTier {
   UNLIMITED
 }
 
+enum SubStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIALING
+}
+
 // =============================================================
 // Agency — Agência (cliente direto da plataforma)
 // =============================================================
@@ -41,6 +48,7 @@ model Agency {
   tenants     Tenant[]
   memberships Membership[]
   branding    AgencyBranding?
+  subscription Subscription?
 
   @@map("agencies")
 }
@@ -59,6 +67,24 @@ model AgencyBranding {
   agency Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
 
   @@map("agency_brandings")
+}
+
+// =============================================================
+// Subscription — Assinatura Stripe da agência
+// =============================================================
+
+model Subscription {
+  id               String    @id @default(cuid())
+  agencyId         String    @unique
+  stripeSubId      String?   @unique
+  status           SubStatus @default(ACTIVE)
+  currentPeriodEnd DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  agency Agency @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+
+  @@map("subscriptions")
 }
 
 // =============================================================

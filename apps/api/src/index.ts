@@ -10,6 +10,9 @@ import tagRouter from "./routes/tag.js";
 import themeRouter from "./routes/theme.js";
 import homepageRouter from "./routes/homepage.js";
 import brandingRouter from "./routes/branding.js";
+import billingRouter from "./routes/billing.js";
+import webhookRouter from "./routes/webhook.js";
+import { authLimiter } from "./middleware/rateLimit.js";
 import { AppError } from "./lib/errors.js";
 import type { Request, Response, NextFunction } from "express";
 
@@ -39,7 +42,7 @@ app.get("/health", (_req, res) => {
 // Routes
 // =============================================================
 
-app.use("/api/auth", authRouter);
+app.use("/api/auth", authLimiter, authRouter);
 app.use("/api/agencies", agencyRouter);
 app.use("/api", tenantRouter);
 app.use("/api/tenants", postRouter);
@@ -48,6 +51,8 @@ app.use("/api/tenants", tagRouter);
 app.use("/api/tenants", themeRouter);
 app.use("/api/tenants", homepageRouter);
 app.use("/api/agencies", brandingRouter);
+app.use("/api/agencies", billingRouter);
+app.use("/webhooks", webhookRouter);
 
 // =============================================================
 // Error Handler
