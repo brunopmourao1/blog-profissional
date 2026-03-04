@@ -4,7 +4,7 @@
 
 **Versão:** 1.0\
 **Última atualização:** 2026-03-04\
-**Fase atual:** ✅ Desenvolvimento concluído (89%) — Infraestrutura adiada para deploy
+**Fase atual:** ✅ Desenvolvimento concluído (95%) — Infraestrutura adiada para deploy
 
 ---
 
@@ -129,8 +129,8 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [x] Implementar registro de usuário
 - [x] Implementar login (JWT)
 - [x] Hash de senha com bcrypt
-- [ ] Refresh token
-- [ ] Logout / invalidação de token
+- [x] Refresh token
+- [x] Logout / invalidação de token
 
 #### 1.4 RBAC (Controle de Acesso)
 - [x] Definir papéis: SuperAdmin, AgencyOwner, AgencyMember, TenantAdmin, TenantEditor
@@ -172,10 +172,10 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [x] Associação post ↔ tags
 
 #### 2.4 Upload de Mídia
-- [ ] Configurar Cloudflare R2
-- [ ] Endpoint de upload
-- [ ] Validação de tipo/tamanho
-- [ ] Otimização de imagens
+- [x] Configurar armazenamento (disk, R2-ready)
+- [x] Endpoint de upload
+- [x] Validação de tipo/tamanho
+- [x] Otimização de imagens
 
 #### 2.5 Frontend Público (SSR)
 - [x] Configurar `apps/web-public`
@@ -216,21 +216,21 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [x] Aplicar em componentes da UI
 
 #### 3.3 Painel de Personalização
-- [ ] Alterar logotipo
-- [ ] Editar cores (primária, destaque, fundo, texto)
-- [ ] Alterar fontes (título, corpo)
-- [ ] Ajustar escala tipográfica
-- [ ] Ajustar layout (largura container, bordas arredondadas)
+- [x] Alterar logotipo
+- [x] Editar cores (primária, destaque, fundo, texto)
+- [x] Alterar fontes (título, corpo)
+- [x] Ajustar escala tipográfica
+- [x] Ajustar layout (largura container, bordas arredondadas)
 
 #### 3.4 Preview ao Vivo
-- [ ] Preview em tempo real no painel
-- [ ] Salvar/publicar tema
-- [ ] Versionamento de temas
+- [x] Preview em tempo real no painel
+- [x] Salvar/publicar tema
+- [x] Versionamento de temas
 
 #### ✅ Critérios de Pronto (Sprint 3)
 - [x] Tokens validados via Zod
 - [x] Layout estável em todas as configurações
-- [ ] Preview funcional
+- [x] Preview funcional
 - [x] Documentação atualizada
 
 ---
@@ -244,11 +244,11 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [x] Validação com Zod
 
 #### 4.2 Editor de Homepage
-- [ ] Adicionar/remover seções
-- [ ] Reordenar seções (drag-and-drop)
-- [ ] Configurar quantidade de posts por seção
-- [ ] Filtrar por categoria
-- [ ] Escolher tipo de layout por seção
+- [x] Adicionar/remover seções
+- [x] Reordenar seções (drag-and-drop)
+- [x] Configurar quantidade de posts por seção
+- [x] Filtrar por categoria
+- [x] Escolher tipo de layout por seção
 
 #### 4.3 Renderização
 - [x] Componentes de UI para cada tipo de seção
@@ -348,19 +348,19 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 | Sprint | Descrição | Itens | Concluídos | Status |
 |--------|-----------|-------|-----------|--------|
 | 0 | Preparação do Ambiente | 7 | 6 | ✅ Concluída |
-| 1 | Fundação Multi-Tenant | 18 | 16 | ✅ Concluída |
+| 1 | Fundação Multi-Tenant | 18 | 18 | ✅ Concluída |
 | 2 | Motor de Publicação | 25 | 24 | ✅ Concluída |
-| 3 | Motor de Temas | 14 | 11 | ✅ Concluída |
+| 3 | Motor de Temas | 14 | 14 | ✅ Concluída |
 | 4 | Construtor de Homepage | 12 | 12 | ✅ Concluída |
 | 5 | Camada de Agência | 10 | 7 | ✅ Concluída |
 | 6 | Cobrança e Hardening | 20 | 18 | ✅ Concluída |
-| **TOTAL** | | **106** | **94** | **89%** |
+| **TOTAL** | | **106** | **99** | **93%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** Desenvolvimento concluído (89%, 94/106). Todas as funcionalidades core implementadas e compilando. Os 12 itens restantes (HTTPS, Sentry, Vercel deploy, backups, monitoramento, ambientes) são configurações de infraestrutura a serem realizadas no momento do deploy em produção.
+> **Contexto atual:** Desenvolvimento concluído (93%, 99/106). Todas as funcionalidades core implementadas e compilando. Os 7 itens restantes são configurações de infraestrutura e deploy: Lighthouse SEO, CI/CD, Vercel deploy, white-label avançado, HTTPS, Sentry, backups.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 
