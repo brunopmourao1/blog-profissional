@@ -58,11 +58,12 @@ model Tenant {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  agency      Agency       @relation(fields: [agencyId], references: [id], onDelete: Cascade)
-  memberships Membership[]
-  posts       Post[]
-  categories  Category[]
-  tags        Tag[]
+  agency         Agency          @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  memberships    Membership[]
+  posts          Post[]
+  categories     Category[]
+  tags           Tag[]
+  themeRevisions ThemeRevision[]
 
   @@index([agencyId])
   @@map("tenants")
@@ -190,4 +191,23 @@ model Tag {
   @@unique([tenantId, slug])
   @@index([tenantId])
   @@map("tags")
+}
+
+// =============================================================
+// ThemeRevision — Revisão de tema com design tokens
+// =============================================================
+
+model ThemeRevision {
+  id        String   @id @default(cuid())
+  tenantId  String
+  version   Int      @default(1)
+  active    Boolean  @default(false)
+  tokens    Json
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, version])
+  @@index([tenantId, active])
+  @@map("theme_revisions")
 }

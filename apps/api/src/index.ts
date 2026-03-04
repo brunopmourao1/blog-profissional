@@ -7,6 +7,7 @@ import tenantRouter from "./routes/tenant.js";
 import postRouter from "./routes/post.js";
 import categoryRouter from "./routes/category.js";
 import tagRouter from "./routes/tag.js";
+import themeRouter from "./routes/theme.js";
 import { AppError } from "./lib/errors.js";
 import type { Request, Response, NextFunction } from "express";
 
@@ -42,6 +43,7 @@ app.use("/api", tenantRouter);
 app.use("/api/tenants", postRouter);
 app.use("/api/tenants", categoryRouter);
 app.use("/api/tenants", tagRouter);
+app.use("/api/tenants", themeRouter);
 
 // =============================================================
 // Error Handler

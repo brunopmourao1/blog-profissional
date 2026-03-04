@@ -1,4 +1,5 @@
 import { prisma } from "@repo/db";
+import { tokensToCssVars, DEFAULT_THEME_TOKENS, type ThemeTokens } from "@repo/config";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -47,12 +48,40 @@ export default async function TenantLayout({
 
     if (!tenant) notFound();
 
+    // Load active theme or defaults
+    const themeRevision = await prisma.themeRevision.findFirst({
+        where: { tenantId: tenant.id, active: true },
+        select: { tokens: true },
+    });
+
+    const tokens = (themeRevision?.tokens as ThemeTokens) || DEFAULT_THEME_TOKENS;
+    const cssVars = tokensToCssVars(tokens);
+
     return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+            {/* Inject theme CSS variables */}
+            <style
+                dangerouslySetInnerHTML={{
+                    __html: `:root { ${cssVars} }
+            body {
+              font-family: var(--font-body);
+              color: var(--color-text);
+              background-color: var(--color-background);
+              font-size: var(--typography-base-size);
+              line-height: var(--typography-line-height);
+            }
+            h1, h2, h3, h4, h5, h6 {
+              font-family: var(--font-heading);
+            }
+            a { color: var(--color-primary); }
+          `,
+                }}
+            />
+
             <header
                 style={{
-                    borderBottom: "1px solid #e5e7eb",
-                    padding: "1rem 2rem",
+                    borderBottom: "1px solid var(--color-muted, #e5e7eb)",
+                    padding: "var(--layout-spacing, 1rem) calc(var(--layout-spacing, 1rem) * 2)",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
@@ -64,7 +93,8 @@ export default async function TenantLayout({
                         fontSize: "1.5rem",
                         fontWeight: 700,
                         textDecoration: "none",
-                        color: "#111827",
+                        color: "var(--color-text)",
+                        fontFamily: "var(--font-heading)",
                     }}
                 >
                     {tenant.name}
@@ -74,7 +104,7 @@ export default async function TenantLayout({
                         <a
                             key={cat.slug}
                             href={`/${tenant.slug}/category/${cat.slug}`}
-                            style={{ textDecoration: "none", color: "#4b5563" }}
+                            style={{ textDecoration: "none", color: "var(--color-muted)" }}
                         >
                             {cat.name}
                         </a>
@@ -82,16 +112,24 @@ export default async function TenantLayout({
                 </nav>
             </header>
 
-            <main style={{ flex: 1, maxWidth: 800, margin: "0 auto", padding: "2rem", width: "100%" }}>
+            <main
+                style={{
+                    flex: 1,
+                    maxWidth: "var(--layout-max-width, 800px)",
+                    margin: "0 auto",
+                    padding: "calc(var(--layout-spacing, 1rem) * 2)",
+                    width: "100%",
+                }}
+            >
                 {children}
             </main>
 
             <footer
                 style={{
-                    borderTop: "1px solid #e5e7eb",
+                    borderTop: "1px solid var(--color-muted, #e5e7eb)",
                     padding: "1.5rem 2rem",
                     textAlign: "center",
-                    color: "#9ca3af",
+                    color: "var(--color-muted)",
                     fontSize: "0.875rem",
                 }}
             >

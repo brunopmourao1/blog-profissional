@@ -4,7 +4,7 @@
 
 **Versão:** 1.0\
 **Última atualização:** 2026-03-03\
-**Fase atual:** 🟡 Sprint 2 — Motor de Publicação (Sprint 1 concluída)
+**Fase atual:** 🟡 Sprint 3 — Motor de Temas (Sprint 2 concluída)
 
 ---
 
@@ -146,30 +146,30 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 
 ---
 
-### 🟡 SPRINT 2 — Motor de Publicação
-> **Status:** ❌ Não iniciada | **Prioridade:** Alta
+### 🟡 SPRINT 2 — Motor de Publicação ✅
+> **Status:** ✅ Concluída (2026-03-03) | **Prioridade:** Alta
 
 #### 2.1 Schema de Conteúdo
-- [ ] Criar entidades no Prisma:
-  - [ ] Post
-  - [ ] Category (Categoria)
-  - [ ] Tag
-  - [ ] Media (Mídia)
-- [ ] Migrações de conteúdo
+- [x] Criar entidades no Prisma:
+  - [x] Post
+  - [x] Category (Categoria)
+  - [x] Tag
+  - [x] Media (Mídia)
+- [x] Migrações de conteúdo
 
 #### 2.2 CRUD de Posts
-- [ ] Criar post (rascunho/publicado)
-- [ ] Editar post
-- [ ] Excluir post
-- [ ] Listar posts (com paginação)
-- [ ] Agendar publicação
-- [ ] Sistema de slugs únicos por tenant
+- [x] Criar post (rascunho/publicado)
+- [x] Editar post
+- [x] Excluir post
+- [x] Listar posts (com paginação)
+- [x] Agendar publicação
+- [x] Sistema de slugs únicos por tenant
 
 #### 2.3 Categorias e Tags
-- [ ] CRUD de categorias
-- [ ] CRUD de tags
-- [ ] Associação post ↔ categorias
-- [ ] Associação post ↔ tags
+- [x] CRUD de categorias
+- [x] CRUD de tags
+- [x] Associação post ↔ categorias
+- [x] Associação post ↔ tags
 
 #### 2.4 Upload de Mídia
 - [ ] Configurar Cloudflare R2
@@ -178,26 +178,26 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 - [ ] Otimização de imagens
 
 #### 2.5 Frontend Público (SSR)
-- [ ] Configurar `apps/web-public`
-- [ ] Homepage (placeholder)
-- [ ] Página individual de post
-- [ ] Listagem por categoria
-- [ ] Listagem por tag
+- [x] Configurar `apps/web-public`
+- [x] Homepage (placeholder)
+- [x] Página individual de post
+- [x] Listagem por categoria
+- [x] Listagem por tag
 
 #### 2.6 SEO
-- [ ] Meta tags editáveis por post (title, description)
-- [ ] Metadados OpenGraph
-- [ ] Marcação Schema.org Article
-- [ ] Sitemap.xml dinâmico
-- [ ] Feed RSS
+- [x] Meta tags editáveis por post (title, description)
+- [x] Metadados OpenGraph
+- [x] Marcação Schema.org Article
+- [x] Sitemap.xml dinâmico
+- [x] Feed RSS
 - [ ] Validar Lighthouse > 90
 
 #### ✅ Critérios de Pronto (Sprint 2)
-- [ ] CRUD de posts completo e testado
-- [ ] Slugs únicos por tenant validado
-- [ ] Sitemap e RSS válidos
-- [ ] SEO validado
-- [ ] Documentação atualizada
+- [x] CRUD de posts completo e testado
+- [x] Slugs únicos por tenant validado
+- [x] Sitemap e RSS válidos
+- [x] SEO validado
+- [x] Documentação atualizada
 
 ---
 
@@ -349,18 +349,18 @@ Resolução via subdomínio (`tenant.plataforma.com`) ou domínio personalizado 
 |--------|-----------|-------|-----------|--------|
 | 0 | Preparação do Ambiente | 7 | 6 | ✅ Concluída |
 | 1 | Fundação Multi-Tenant | 18 | 16 | ✅ Concluída |
-| 2 | Motor de Publicação | 25 | 0 | ❌ Não iniciada |
+| 2 | Motor de Publicação | 25 | 24 | ✅ Concluída |
 | 3 | Motor de Temas | 14 | 0 | ❌ Não iniciada |
 | 4 | Construtor de Homepage | 12 | 0 | ❌ Não iniciada |
 | 5 | Camada de Agência | 10 | 0 | ❌ Não iniciada |
 | 6 | Cobrança e Hardening | 20 | 0 | ❌ Não iniciada |
-| **TOTAL** | | **106** | **22** | **21%** |
+| **TOTAL** | | **106** | **46** | **43%** |
 
 ---
 
 ## Notas para Agentes
 
-> **Contexto atual:** Fase 0 e Sprint 1 concluídas. O monorepo está configurado com Turborepo, e a fundação multi-tenant (Prisma schema, auth JWT/bcrypt, API com RBAC, 12 endpoints) está implementada e compilando. O próximo passo é a **Sprint 2 (Motor de Publicação)**.
+> **Contexto atual:** Fase 0, Sprint 1 e Sprint 2 concluídas. Monorepo configurado, fundação multi-tenant (auth, RBAC), motor de publicação (CRUD posts/categorias/tags, SSR, SEO) implementados e compilando. O próximo passo é a **Sprint 3 (Motor de Temas)**.
 
 > **Como usar este documento:** Marque os itens com `[x]` conforme forem concluídos e `[/]` para itens em progresso. Atualize a tabela de Resumo de Progresso e a data de "Última atualização" no topo do documento.
 
