@@ -1,6 +1,6 @@
 import { prisma } from "@repo/db";
 import type { Metadata } from "next";
-import { ToggleButton } from "./ToggleButton";
+import { TenantsListClient } from "./TenantsListClient";
 
 export const dynamic = "force-dynamic";
 
@@ -27,39 +27,15 @@ export default async function TenantsPage() {
     const agencyId = tenants[0]?.agencyId || "";
 
     return (
-        <>
-            <header className="page-header">
-                <div>
-                    <h1>Blogs / Tenants</h1>
-                    <p className="page-header-sub">{tenants.length} blog(s) registrado(s)</p>
-                </div>
-                <a href={`/dashboard/tenants/new?agencyId=${agencyId}`} className="btn btn-primary">
-                    + Novo Blog
-                </a>
-            </header>
-
-            <div className="page-body">
-                {tenants.length === 0 ? (
-                    <p style={{ color: "var(--text-muted)" }}>Nenhum blog criado.</p>
-                ) : (
-                    <div className="stack stack-sm">
-                        {tenants.map((t) => (
-                            <div key={t.id} className="list-item">
-                                <a href={`/dashboard/tenants/${t.id}`} style={{ flex: 1, textDecoration: "none", color: "inherit" }}>
-                                    <div className="list-item-title">{t.name}</div>
-                                    <div className="list-item-sub">/{t.slug} · {t._count.posts} posts</div>
-                                </a>
-                                <div className="row gap-sm">
-                                    <ToggleButton tenantId={t.id} active={t.active} />
-                                    <span className={`badge ${t.active ? "badge-success" : "badge-danger"}`}>
-                                        {t.active ? "Ativo" : "Inativo"}
-                                    </span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </>
+        <TenantsListClient
+            agencyId={agencyId}
+            tenants={tenants.map((t) => ({
+                id: t.id,
+                name: t.name,
+                slug: t.slug,
+                active: t.active,
+                postCount: t._count.posts,
+            }))}
+        />
     );
 }

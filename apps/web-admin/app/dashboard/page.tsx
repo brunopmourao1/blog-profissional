@@ -1,5 +1,6 @@
 import { prisma } from "@repo/db";
 import type { Metadata } from "next";
+import { DashboardClient } from "./DashboardClient";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage() {
-    const stats = await prisma.agency.findFirst({
+    const agency = await prisma.agency.findFirst({
         select: {
             name: true,
             planTier: true,
@@ -35,55 +36,21 @@ export default async function DashboardPage() {
     });
 
     return (
-        <>
-            <header className="page-header">
-                <div>
-                    <h1>Dashboard</h1>
-                    <p className="page-header-sub">Visão geral da agência</p>
-                </div>
-            </header>
-
-            <div className="page-body stack stack-lg">
-                <div className="stats-grid">
-                    <div className="card stat-card">
-                        <div className="stat-label">Plano</div>
-                        <div className="stat-value">{stats?.planTier || "—"}</div>
-                    </div>
-                    <div className="card stat-card">
-                        <div className="stat-label">Blogs</div>
-                        <div className="stat-value">{stats?._count.tenants || 0}</div>
-                    </div>
-                    <div className="card stat-card">
-                        <div className="stat-label">Membros</div>
-                        <div className="stat-value">{stats?._count.memberships || 0}</div>
-                    </div>
-                    <div className="card stat-card">
-                        <div className="stat-label">Posts total</div>
-                        <div className="stat-value">{recentPosts.length}</div>
-                    </div>
-                </div>
-
-                <div>
-                    <div className="section-header">
-                        <h2 className="section-title">Últimos Posts</h2>
-                    </div>
-                    <div className="stack stack-sm">
-                        {recentPosts.map((post) => (
-                            <a key={post.id} href={`/dashboard/tenants/${post.tenant.id}/posts/${post.id}`} className="list-item">
-                                <div>
-                                    <div className="list-item-title">{post.title}</div>
-                                    <div className="list-item-sub">
-                                        {post.tenant.name} · {new Date(post.createdAt).toLocaleDateString("pt-BR")}
-                                    </div>
-                                </div>
-                                <span className={`badge ${post.status === "PUBLISHED" ? "badge-success" : "badge-warning"}`}>
-                                    {post.status === "PUBLISHED" ? "Publicado" : "Rascunho"}
-                                </span>
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </>
+        <DashboardClient
+            stats={{
+                planTier: agency?.planTier || "—",
+                tenants: agency?._count.tenants || 0,
+                members: agency?._count.memberships || 0,
+                posts: recentPosts.length,
+            }}
+            recentPosts={recentPosts.map((p) => ({
+                id: p.id,
+                title: p.title,
+                status: p.status,
+                createdAt: p.createdAt.toISOString(),
+                tenantId: p.tenant.id,
+                tenantName: p.tenant.name,
+            }))}
+        />
     );
 }
